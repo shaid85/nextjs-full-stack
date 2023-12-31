@@ -25,6 +25,10 @@ export default function ProfilePage() {
         const res = await axios.get('/api/users/me')
         console.log(res.data);
         setUserData(res.data.data._id)   
+        toast.success("Success",{
+            duration: 5000,
+            icon: '🔥',
+          });
     }
     return (
         <div className="w-full">

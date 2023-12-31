@@ -13,16 +13,17 @@ export const sendEmail = async ({email, emailType, userId}:any) => {
         }
 
         var transport = nodemailer.createTransport({
-            host: "sandbox.smtp.mailtrap.io",
-            port: 2525,
+            host: "smtp.gmail.com",
+            port: 587,
+            secure: false,
             auth: {
-              user: "a5b5638b1ab4b4",
-              pass: "41a8e48226af30"
+              user: "fxpipsmaker6@gmail.com",
+              pass: "rkje cavy tybc ockb"
             }
           });
 
           const mailOptions = {
-            from: 'shaid85@gmail.com',
+            from: 'fxpipsmaker6@gmail.com',
             to: email,
             subject: emailType === "VERIFY" ? "Verify your email" : "Reset your password",
             html: `<p>Click <a href="${process.env.DOMAIN}/verifyemail?token=${hashedToken}">here</a> to ${emailType === "VERIFY" ? "verify your email" : "reset your password"}
