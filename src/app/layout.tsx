@@ -2,6 +2,10 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import { Toaster } from "react-hot-toast";
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import ThemeContextProvider from '@/context/ThemeContextProvider';
+import Container from '@/components/Container';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -18,8 +22,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-          {children}
-          <Toaster />
+        <ThemeContextProvider>
+          <Header />
+          <div className="className='w-full py-8 bg-white dark:bg-gray-800 dark:text-white min-h-screen'">
+            <Container>
+                {children}
+            </Container>
+          </div>  
+            <Toaster />
+          <Footer />  
+        </ThemeContextProvider>
       </body>
     </html>
   )
