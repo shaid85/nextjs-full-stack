@@ -10,7 +10,7 @@ export default function verifyemailPage(){
 
     const verifyUserEmail = async () => {
         try {
-            await axios.post('/api/users/verifyemail', {token})
+            await axios.post('/api/users/verifyemail', {token}) 
             setVerified(true)
         } catch (error:any) {
             setError(true)
@@ -23,6 +23,7 @@ export default function verifyemailPage(){
         const urlToken = window.location.search.split("=")[1]
         setToken(urlToken || "")
     }, [])
+    
     useEffect(() => {
         if(token.length > 0) {
             verifyUserEmail();

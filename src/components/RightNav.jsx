@@ -73,7 +73,7 @@ function RightNav() {
     id="mobile-menu-2"
 >  
         <div className="text-sm lg:flex-grow">
-            <ul onClick={ulclick} className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
+            <ul onClick={ulclick} className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-2 lg:mt-0">
                 <li>
                     <Link href="/" className="text-gray-800 dark:text-white font-medium text-sm px-2 lg:px-3 py-2 lg:py-2.5 mr-2 lg:mr-0 focus:outline-none">
                         Home

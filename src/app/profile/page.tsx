@@ -31,15 +31,14 @@ export default function ProfilePage() {
           });
     }
     return (
-        <div className="w-full">
-            <h1>Profile</h1> 
-            <hr />
-            <p>Profile Page</p>
+        <div className="text-center mx-auto w-80 py-16">
+            <h1>Profile Page</h1> 
+            <p>-------------</p>
             <h2 className="p-1 rounded bg-green-500">{userData === "nothing" ? "Nothing" : <Link href={`/profile/${userData}`} >{userData}</Link>}</h2>
-            <button className=""
+            <button className=" bg-slate-600 mt-4 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-2"
             onClick={logout}
             >Logout</button>
-
+<br/>
             <button
         onClick={getUserDetails}
         className="bg-green-800 mt-4 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
