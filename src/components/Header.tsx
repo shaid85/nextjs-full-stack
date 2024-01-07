@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Container from './Container'
-import RightNav from './RightNav'
+import NavList from './NavList'
 
 function Header() {
 
@@ -21,7 +21,7 @@ function Header() {
                                     alt="Logo"
                                 />
                             </Link>
-                            <RightNav />
+                            <NavList />
                     </div>
             </div>
         </Container>

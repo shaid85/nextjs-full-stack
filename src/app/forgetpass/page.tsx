@@ -17,11 +17,11 @@ export default function LoginPage() {
             setLoading(true)
             const response = await axios.post('api/users/sendforgettoken', user)
             console.log("Forget token successful ", response.data);
-            toast.success("Forget token sent",{
+            toast.success("Token sent, please check",{
                 duration: 5000,
                 icon: '🔥',
               })
-            
+            setUser({email: ""})
         } catch (error: any) {
             console.log("Forget token  failed", error.message);
             toast.error(error.message)
@@ -32,7 +32,7 @@ export default function LoginPage() {
     }
 
     useEffect(() => {
-        if(user.email.length > 0 ) {
+        if(user.email.length > 12 ) {
             setButtonDisabled(false);
         } else {
             setButtonDisabled(true);

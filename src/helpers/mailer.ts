@@ -13,12 +13,18 @@ export const sendEmail = async ({email, emailType, userId}:any) => {
         }
 
         var transport = nodemailer.createTransport({
-            host: "smtp.gmail.com",
-            port: 587,
-            secure: false,
+            // host: "smtp.gmail.com",
+            // port: 587,
+            // secure: false,
+            // auth: {
+            //   user: "fxpipsmaker6@gmail.com",
+            //   pass: "rkje cavy tybc ockb"
+            // }
+            host: "sandbox.smtp.mailtrap.io",
+            port: 2525,
             auth: {
-              user: "fxpipsmaker6@gmail.com",
-              pass: "rkje cavy tybc ockb"
+              user: "a5b5638b1ab4b4",
+              pass: "41a8e48226af30"
             }
           });
 
