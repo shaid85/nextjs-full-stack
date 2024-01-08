@@ -42,11 +42,7 @@ export async function POST(request: NextRequest) {
         })
         response.cookies.set("token", token, {
             httpOnly: true,
-            secure: true,
-            sameSite: "lax",
-            maxAge: 1000 * 60 * 60 * 24 * 30,
-            domain: "nextjs-mdb-project.vercel.app",
-            path: "/",
+            sameSite:false,
         })
         
         return response;
