@@ -4,7 +4,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 
-export default async function logoutPage() {
+export default async function Logout() {
     const router = useRouter()
 
         try {
