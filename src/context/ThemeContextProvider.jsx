@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { ThemeContext } from './ThemeContext'
 
 const ThemeContextProvider =({children}) => {
-    const [themeMode, setThemeMode] = useState('dark')
+    const [themeMode, setThemeMode] = useState('light')
     
     const lightTheme = () => {
         setThemeMode("light")
