@@ -1,10 +1,16 @@
 "use client"
 import Link from 'next/link'
 import useThemeCnr from '@/context/ThemeContext';
-import { useEffect, useState } from 'react';
-import RightNav from './RightNav'
+import { useContext, useEffect, useState } from 'react';
+import { authContext } from '@/context/authContext';
+import { logout } from '@/helpers/userService';
+import toast from 'react-hot-toast';
+import { useRouter } from "next/navigation";
 
 function NavList() {
+    const router = useRouter()
+    const context = useContext(authContext)
+    console.log(context);
     const {themeMode, darkTheme, lightTheme} = useThemeCnr()
     const onChangeBtn = (e) => {
         const darkModeStatus = e.currentTarget.checked
@@ -36,11 +42,41 @@ function NavList() {
             }, 100);   
     } 
 
-
+    async function doLogout () {
+        try {
+          const result = await logout()
+          console.log(result);
+          context.setUserinfo("")
+          router.push('/login')
+        } catch (error) {
+            throw error
+        }
+    }
   return (
     <>
-    <nav className="flex items-center lg:order-2">   
-            <RightNav />
+    <nav className="flex items-center lg:order-2">  
+        { context.userinfo && (
+            <>  
+        <Link href="#"  className="text-gray-800 dark:text-white font-medium text-sm px-2 lg:px-3 py-2 lg:py-2.5 mr-2 lg:mr-0 focus:outline-none">
+            {context.userinfo.charAt(0).toUpperCase() + context.userinfo.slice(1)}
+        </Link>              
+        <Link href="#" onClick={doLogout} className="text-gray-800 dark:text-white font-medium text-sm px-2 lg:px-3 py-2 lg:py-2.5 mr-2 lg:mr-0 focus:outline-none">
+            Logout
+        </Link>             
+            </>
+        )} 
+        { !context.userinfo && (
+            <>
+        <Link href="/login" className="text-gray-800 dark:text-white font-medium text-sm px-2 lg:px-3 py-2 lg:py-2.5 mr-2 lg:mr-0 focus:outline-none">
+            Login
+        </Link>                    
+        <Link href="/signup" className="text-gray-800 dark:text-white font-medium text-sm px-2 lg:px-3 py-2 lg:py-2.5 mr-2 lg:mr-0 focus:outline-none">
+            Signup
+        </Link> 
+            </>
+        )}
+
+
         <label className="relative inline-flex items-center cursor-pointer">
                 <input
                     type="checkbox"
@@ -80,6 +116,14 @@ function NavList() {
                         About
                     </Link>
                 </li>
+                { context.userinfo && (
+                 <li>
+                    <Link href="/profile" className="text-gray-800 dark:text-white font-medium text-sm px-2 lg:px-3 py-2 lg:py-2.5 mr-2 lg:mr-0 focus:outline-none">
+                        Profile
+                    </Link>  
+                </li> 
+                )}                 
+
             </ul>
 
                     

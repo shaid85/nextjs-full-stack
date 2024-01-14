@@ -6,6 +6,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ThemeContextProvider from '@/context/ThemeContextProvider';
 import Container from '@/components/Container';
+import AuthProvider from '@/context/AuthProvider';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -22,16 +23,19 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+        
         <ThemeContextProvider>
-          <Header />
-          <div className="className='w-full py-8 bg-white dark:bg-gray-800 dark:text-white min-h-screen'">
-            <Container>
-                {children}
-            </Container>
-          </div>  
-            <Toaster />
-          <Footer />  
-        </ThemeContextProvider>
+          <AuthProvider>
+              <Header />
+                <div className="className='w-full py-8 bg-white dark:bg-gray-800 dark:text-white min-h-screen'">
+                  <Container>
+                      {children}
+                  </Container>
+                </div>  
+                <Toaster />
+              <Footer />  
+          </AuthProvider>
+         </ThemeContextProvider>
       </body>
     </html>
   )

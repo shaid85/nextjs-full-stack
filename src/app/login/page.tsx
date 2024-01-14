@@ -1,11 +1,13 @@
 "use client"
 import axios from 'axios';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import {useRouter} from 'next/navigation';
 import toast from 'react-hot-toast';
+import { authContext } from '@/context/authContext';
 
 export default function LoginPage() {
+    const context = useContext(authContext)
     const router = useRouter()
     const [user, setUser] = useState({
         email: "",
@@ -24,6 +26,7 @@ export default function LoginPage() {
                 duration: 5000,
                 icon: '🔥',
               })
+            context.setUserinfo(response.data.username)
             router.push("/profile");
         } catch (error: any) {
             console.log("Login failed", error.message);
