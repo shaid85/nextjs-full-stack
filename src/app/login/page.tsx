@@ -2,12 +2,12 @@
 import axios from 'axios';
 import Link from 'next/link';
 import { useContext, useEffect, useState } from 'react';
+import { authContext } from '@/context/authContext';
 import {useRouter} from 'next/navigation';
 import toast from 'react-hot-toast';
-import { authContext } from '@/context/authContext';
 
 export default function LoginPage() {
-    const context = useContext(authContext)
+    const { setUserinfo } = useContext(authContext)
     const router = useRouter()
     const [user, setUser] = useState({
         email: "",
@@ -20,13 +20,10 @@ export default function LoginPage() {
     const onLogin = async () => {
         try {
             setLoading(true)
-            const response = await axios.post('api/users/login', user)
+            const response = await axios.post('api/users/login', user)            
+            setUserinfo(response.data.username)
             console.log("Login successful ", response.data);
-            toast.success("Login success",{
-                duration: 5000,
-                icon: '🔥',
-              })
-            context.setUserinfo(response.data.username)
+            toast.success("Login success")
             router.push("/profile");
         } catch (error: any) {
             console.log("Login failed", error.message);
