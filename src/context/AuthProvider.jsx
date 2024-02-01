@@ -9,24 +9,25 @@ const AuthProvider = ({children}) => {
     const getUserDetails = async () => {
       try {
         const res = await axios.get('/api/users/me')
-        setUserinfo(res.data.data.username)   
+        setUserinfo(res.data.status)   
       } catch (error) {
         console.log(error);
         // toast.error("Error in loading userdata!")
       }
     }
-  useEffect(() => {
-    const username = JSON.parse(localStorage.getItem("username"))
-    if (username != "") {
-      setUserinfo(username)   
-      getUserDetails()  
-    }
     
-  }, [])
+  // useEffect(() => {
+  //   const username = JSON.parse(localStorage.getItem("username"))
+  //   if (username != "") {
+  //     setUserinfo(username)   
+  //     getUserDetails()  
+  //   }
+    
+  // }, [])
 
-useEffect(()=>{
-    localStorage.setItem("username", JSON.stringify(userinfo))
-}, [userinfo])
+// useEffect(()=>{
+//     localStorage.setItem("username", JSON.stringify(userinfo))
+// }, [userinfo])
     
   return (
     <authContext.Provider value={{userinfo,setUserinfo}}>

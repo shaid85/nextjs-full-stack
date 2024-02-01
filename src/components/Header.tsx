@@ -7,7 +7,7 @@ function Header() {
   return (
     <header  className=" bg-white shadow sticky z-50 top-0 dark:bg-gray-800 text-white">
         <Container>
-            <div className="border-gray-200 px-4 lg:px-6 py-2.5">
+            <div className="border-gray-200 px-4 md:px-6 py-2.5">
                 <div className="flex flex-wrap justify-between items-center mx-auto ">
                             <Link href="/" className="flex items-center">
                                 <img

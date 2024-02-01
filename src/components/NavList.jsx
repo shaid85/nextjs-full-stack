@@ -1,16 +1,14 @@
 "use client"
 import Link from 'next/link'
 import useThemeCnr from '@/context/ThemeContext';
-import { useContext, useEffect, useState } from 'react';
-import { authContext } from '@/context/authContext';
+import { useEffect, useState } from 'react';
 import { logout } from '@/helpers/userService';
-import toast from 'react-hot-toast';
 import { useRouter } from "next/navigation";
+import useAuth from "@/context/useAuth";
 
 function NavList() {
     const router = useRouter()
-    const context = useContext(authContext)
-    console.log(context);
+    const {authStatus,setAuthStatus} = useAuth()
     const {themeMode, darkTheme, lightTheme} = useThemeCnr()
     const onChangeBtn = (e) => {
         const darkModeStatus = e.currentTarget.checked
@@ -45,27 +43,25 @@ function NavList() {
     async function doLogout () {
         try {
           const result = await logout()
-          console.log(result);
-          context.setUserinfo("")
+          setAuthStatus(false);
           router.push('/login')
         } catch (error) {
             throw error
         }
     }
+    
   return (
     <>
-    <nav className="flex items-center lg:order-2">  
-        { context.userinfo && (
+    <nav className="flex items-center md:order-2">  
+        { authStatus && (
             <>  
-        <Link href="#"  className="text-gray-800 dark:text-white font-medium text-sm px-2 lg:px-3 py-2 lg:py-2.5 mr-2 lg:mr-0 focus:outline-none">
-            {context.userinfo.charAt(0).toUpperCase() + context.userinfo.slice(1)}
-        </Link>              
+
         <Link href="#" onClick={doLogout} className="text-gray-800 dark:text-white font-medium text-sm px-2 lg:px-3 py-2 lg:py-2.5 mr-2 lg:mr-0 focus:outline-none">
             Logout
         </Link>             
             </>
         )} 
-        { !context.userinfo && (
+        { !authStatus && (
             <>
         <Link href="/login" className="text-gray-800 dark:text-white font-medium text-sm px-2 lg:px-3 py-2 lg:py-2.5 mr-2 lg:mr-0 focus:outline-none">
             Login
@@ -89,7 +85,7 @@ function NavList() {
                 <span className="ml-3 text-sm font-medium text-gray-900 dark:text-white hidden md:block">Toggle Theme</span>
             </label>
 
-            <div className="md:hidden flex items-center lg:order-2 ml-2 mt-1">
+            <div className="md:hidden flex items-center md:order-2 ml-2 mt-1">
                 <button onClick={handelclick}
                     id="showmenu" className="text-3xl cursor-pointer " >
                     <div className="hover:cursor-pointer ">
@@ -101,24 +97,24 @@ function NavList() {
             </div>                 
     </nav>
     <nav
-    className={`lg:!max-h-none lg:!overflow-hidden w-full overflow-hidden lg:flex lg:items-center transition-all lg:w-auto mobilemenu ${hidden}`}
+    className={`md:!max-h-none md:!overflow-hidden w-full overflow-hidden md:flex md:items-center transition-all md:w-auto mobilemenu ${hidden}`}
     id="mobile-menu-2"
 >  
-        <div className="text-sm lg:flex-grow">
-            <ul onClick={ulclick} className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-2 lg:mt-0">
+        <div className="text-sm md:flex-grow">
+            <ul onClick={ulclick} className="flex flex-col mt-4 font-medium md:flex-row md:space-x-8 md:mt-0">
                 <li>
-                    <Link href="/" className="text-gray-800 dark:text-white font-medium text-sm px-2 lg:px-3 py-2 lg:py-2.5 mr-2 lg:mr-0 focus:outline-none">
+                    <Link href="/" className="text-gray-800 dark:text-white block py-2 pr-4 pl-3 duration-200 border-b border-gray-100 hover:bg-black/10 md:hover:bg-transparent md:border-0 hover:text-orange-700 md:p-0">
                         Home
                     </Link>
                 </li>
                 <li>
-                    <Link href="/about" className="text-gray-800 dark:text-white font-medium text-sm px-2 lg:px-3 py-2 lg:py-2.5 mr-2 lg:mr-0 focus:outline-none">
+                    <Link href="/about" className="text-gray-800 dark:text-white block py-2 pr-4 pl-3 duration-200 border-b border-gray-100 hover:bg-black/10 md:hover:bg-transparent md:border-0 hover:text-orange-700 md:p-0">
                         About
                     </Link>
                 </li>
-                { context.userinfo && (
+                { authStatus && (
                  <li>
-                    <Link href="/profile" className="text-gray-800 dark:text-white font-medium text-sm px-2 lg:px-3 py-2 lg:py-2.5 mr-2 lg:mr-0 focus:outline-none">
+                    <Link href="/profile" className="text-gray-800 dark:text-white block py-2 pr-4 pl-3 duration-200 border-b border-gray-100 hover:bg-black/10 md:hover:bg-transparent md:border-0 hover:text-orange-700 md:p-0">
                         Profile
                     </Link>  
                 </li> 

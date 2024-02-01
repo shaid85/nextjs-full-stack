@@ -64,12 +64,12 @@ export default function SingupPage() {
             </p>
             
           
-                <label className='block mb-1 pl-1' htmlFor=''>Username: </label>
+                <label className='block mb-1 pl-1' htmlFor=''>Full Name: </label>
                 <input 
                 type="text" className='px-3 py-2 rounded-lg bg-white 
                 text-black outline-none focus:bg-gray-50 duration-200 border 
                 border-gray-200 w-full'
-                placeholder='username' value={user.username}
+                placeholder='Full Name' value={user.username}
                 onChange={(e) => setUser({...user, username: e.target.value})}
                 />
                 <label className='block mb-1 pl-1' htmlFor=''>Email: </label>
