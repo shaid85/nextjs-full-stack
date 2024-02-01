@@ -21,12 +21,13 @@ export default function SingupPage() {
             setLoading(true);
             const response = await axios.post("/api/users/signup", user);
             console.log("Signup success", response.data);
+            toast.success(response.data.message)
             router.push("/verifyemail");
             
         } catch (error:any) {
             console.log("Signup failed", error.message);
             
-            toast.error(error.message);
+            toast.error(error.response.data.error+" - "+error.response.status); 
         }finally {
             setLoading(false);
         }

@@ -24,7 +24,7 @@ export default function LoginPage() {
             setUser({email: ""})
         } catch (error: any) {
             console.log("Forget token  failed", error.message);
-            toast.error(error.message)
+            toast.error(error.response.data.error+" - "+error.response.status)
         } finally {
             setLoading(false)
         }

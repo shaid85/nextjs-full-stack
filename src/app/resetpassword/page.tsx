@@ -33,8 +33,8 @@ export default function ResetPassword(){
               setVerified(true)
             // router.push("/login");
         } catch (error: any) {
-            console.log("Reset failed", error.message);
-            toast.error(error.message)
+            console.log("Reset failed", error.response);
+            toast.error(error.response.data.error+" - "+error.response.status)
             setError(true)
         } finally {
             setLoading(false)
