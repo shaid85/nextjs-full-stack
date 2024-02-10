@@ -35,7 +35,7 @@ export default function RootLayout({
           {!loader && (
             <>
               <Header />
-                <div className="className='w-full py-8 bg-white dark:bg-gray-800 dark:text-white min-h-screen'">
+                <div className="className='w-full py-8 bg-white text-gray-900 dark:bg-gray-800 dark:text-white min-h-screen'">
                   <Container>
                       {children}
                   </Container>

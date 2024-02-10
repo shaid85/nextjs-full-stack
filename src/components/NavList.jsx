@@ -3,11 +3,12 @@ import Link from 'next/link'
 import useThemeCnr from '@/context/ThemeContext';
 import { useEffect, useState } from 'react';
 import { logout } from '@/helpers/userService';
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import useAuth from "@/context/useAuth";
 
 function NavList() {
     const router = useRouter()
+    const pathname = usePathname()
     const {authStatus,setAuthStatus} = useAuth()
     const {themeMode, darkTheme, lightTheme} = useThemeCnr()
     const onChangeBtn = (e) => {
@@ -50,6 +51,25 @@ function NavList() {
         }
     }
     
+    const navItem = [
+        {
+            name: "Home",
+            slug: "/",
+            active: true
+        },
+        {
+            name: "About",
+            slug: "/about",
+            active: true
+        },
+        {
+            name: "Profile",
+            slug: "/profile",
+            active: authStatus,
+        },
+        
+    ]
+
   return (
     <>
     <nav className="flex items-center md:order-2">  
@@ -102,23 +122,17 @@ function NavList() {
 >  
         <div className="text-sm md:flex-grow">
             <ul onClick={ulclick} className="flex flex-col mt-4 font-medium md:flex-row md:space-x-8 md:mt-0">
-                <li>
-                    <Link href="/" className="text-gray-800 dark:text-white block py-2 pr-4 pl-3 duration-200 border-b border-gray-100 hover:bg-black/10 md:hover:bg-transparent md:border-0 hover:text-orange-700 md:p-0">
-                        Home
+            {navItem.map((item) => (
+                item.active ? (                
+                <li key={item.slug}>
+                    <Link href={item.slug} className={`${pathname === item.slug ? 'text-orange-700' : '' } text-gray-800 dark:text-white block py-2 pr-4 pl-3 duration-200 border-b border-gray-100 hover:bg-black/10 md:hover:bg-transparent md:border-0 hover:text-orange-700 md:p-0`}>
+                    {item.name}
                     </Link>
                 </li>
-                <li>
-                    <Link href="/about" className="text-gray-800 dark:text-white block py-2 pr-4 pl-3 duration-200 border-b border-gray-100 hover:bg-black/10 md:hover:bg-transparent md:border-0 hover:text-orange-700 md:p-0">
-                        About
-                    </Link>
-                </li>
-                { authStatus && (
-                 <li>
-                    <Link href="/profile" className="text-gray-800 dark:text-white block py-2 pr-4 pl-3 duration-200 border-b border-gray-100 hover:bg-black/10 md:hover:bg-transparent md:border-0 hover:text-orange-700 md:p-0">
-                        Profile
-                    </Link>  
-                </li> 
-                )}                 
+                ) : null
+
+            ))}
+                                 
 
             </ul>
 
